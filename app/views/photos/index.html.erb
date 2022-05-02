@@ -7,7 +7,7 @@
       </div>
     <% end %>
     <div class="card__wrapper">
-      <%# 投稿機能実装後、部分テンプレートで投稿一覧を表示する %>
+      <%= render partial: "photo", collection: @photos %>
     </div>
   </div>
 </main>

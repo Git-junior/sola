@@ -1,0 +1,15 @@
+<%= form_with model: @photo, local: true do |f|%>
+  <div class="field">
+    <%= f.label :content, "どんな気持ち？" %><br />
+    <%= f.text_field :content, id:"prototype_title" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image, "画像" %><br />
+    <%= f.file_field :image, id:"prototype_image" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "保存する", class: :form__btn  %>
+  </div>
+<% end %>

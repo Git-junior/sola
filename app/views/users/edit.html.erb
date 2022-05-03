@@ -1,0 +1,22 @@
+<div class="main">
+  <div class="inner">
+    <div class="user__wrapper">
+      <h2 class="page-heading">
+        <%= "アカウントの編集" %>
+      </h2>
+      <%= form_with model: current_user, local: true do |f|%>
+        <div class='field'>
+          <%= f.label :name, "ユーザー名" %><br />
+          <%= f.text_field :name, autofocus: true, id:"user_name" %>
+        </div>
+        <div class='field'>
+          <%= f.label :email, "メールアドレス" %><br />
+          <%= f.email_field :email, id:"user_email", autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class='actions'>
+          <%= f.submit "更新", class: 'form__btn'%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

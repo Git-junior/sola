@@ -21,6 +21,12 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   private
 
   def photo_params

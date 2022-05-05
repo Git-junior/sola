@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:show, :edit, :destroy]
 
   def index
     @photos = Photo.where(user_id: current_user)
@@ -45,6 +46,12 @@ class PhotosController < ApplicationController
 
   def set_photo
     @photo = Photo.find(params[:id])
+  end
+
+  def move_to_index
+    unless current_user == @photo.user
+      redirect_to action: :index
+    end
   end
 
 end

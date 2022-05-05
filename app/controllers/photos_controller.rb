@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
   def index
-    @photos = Photo.all
+    @photos = Photo.where(user_id: current_user)
   end
 
   def new

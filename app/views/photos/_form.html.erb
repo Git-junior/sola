@@ -1,11 +1,11 @@
 <%= form_with model: @photo, local: true do |f|%>
   <div class="field">
-    <%= f.label :content, "どんな気持ち？" %><br />
+    <%= f.label :content, "今、どんな気持ち？" %><br />
     <%= f.text_field :content, id:"prototype_title" %>
   </div>
 
   <div class="field">
-    <%= f.label :image, "画像" %><br />
+    <%= f.label :image, "今、どんな空？" %><br />
     <%= f.file_field :image, id:"prototype_image" %>
   </div>
 

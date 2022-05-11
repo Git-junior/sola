@@ -38,8 +38,10 @@ https://docs.google.com/spreadsheets/d/11hLCWlFRvoMEKDqSbjivDohZ3z9LIch45zRuR8ck
 [![Image from Gyazo](https://i.gyazo.com/d7fb805e563c5cb84ca44fd05b88b036.jpg)](https://gyazo.com/d7fb805e563c5cb84ca44fd05b88b036)
 
 # 実装予定の機能
-- BOT機能
-- 画像識別機能
+- テストコード
+- デモ投稿表示機能
+- メール自動送信機能
+- ~~画像識別機能~~
 
 # データベース設計
 ![test](https://user-images.githubusercontent.com/92853864/167257957-74215d65-fe90-42e6-bd19-188a3c92f73a.png)

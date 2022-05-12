@@ -8,6 +8,11 @@
     <% end %>
     <div class="card__wrapper">
       <%= render partial: "photo", collection: @photos %>
+
+      <% if @photos == [] %>
+        <%= render partial: "sample" %>
+      <% end %>
+
     </div>
   </div>
 </main>

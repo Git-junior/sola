@@ -70,7 +70,10 @@ RSpec.describe 'ログイン', type: :system do
   context 'ログインしていないとき' do
     it 'ログインしていない状態でトップページにアクセスした場合、ログインページに移動する' do
       # トップページに移動する
+      basic_pass root_path
+      visit root_path
       # ログインしていない場合、ログインページに遷移されることを確認する
+      expect(current_path).to eq(new_user_session_path)
     end
   end
   context 'ログインができるとき' do

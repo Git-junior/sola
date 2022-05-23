@@ -70,23 +70,42 @@ RSpec.describe 'ログイン', type: :system do
   context 'ログインができるとき' do
     it '保存されているユーザーの情報と合致すればログインができる' do
       # トップページに移動する
+      basic_pass root_path
+      visit root_path
       # トップページにログインページに遷移するボタンがあることを確認する
+      expect(page).to have_content('ログイン')
       # ログインページへ移動する
+      visit new_user_session_path
       # ユーザー情報を入力する
+      fill_in 'メールアドレス', with: @user.email
+      fill_in 'パスワード（6文字以上）', with: @user.password
       # ログインボタンを押す
+      find('input[name="commit"]').click
       # トップページへ移動したことを確認する
+      expect(current_path).to eq(root_path)
       # ログアウトボタンが表示されることを確認する
+      expect(page).to have_content('ログアウト')
       # 新規登録ページへ遷移するボタンや、ログインページへ遷移するボタンが表示されていないことを確認する
+      expect(page).to have_no_content('新規登録')
+      expect(page).to have_no_content('ログイン')
     end
   end
   context 'ログインができないとき' do
     it '保存されているユーザーの情報と合致しないとログインができない' do
       # トップページに移動する
+      basic_pass root_path
+      visit root_path
       # トップページにログインページに遷移するボタンがあることを確認する
+      expect(page).to have_content('ログイン')
       # ログインページへ移動する
+      visit new_user_session_path
       # ユーザー情報を入力する
+      fill_in 'メールアドレス', with: ''
+      fill_in 'パスワード（6文字以上）', with: ''
       # ログインボタンを押す
+      find('input[name="commit"]').click
       # ログインページに戻されることを確認する
+      expect(current_path).to eq(user_session_path)
     end
   end
 end

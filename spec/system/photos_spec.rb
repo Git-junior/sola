@@ -1,9 +1,64 @@
 require 'rails_helper'
 
-RSpec.describe "Photos", type: :system do
+def basic_pass(path)
+  username = ENV["BASIC_AUTH_USER"]
+  password = ENV["BASIC_AUTH_PASSWORD"]
+  visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
+end
+
+RSpec.describe 'プロトタイプ情報投稿', type: :system do
   before do
-    driven_by(:rack_test)
+    @user = FactoryBot.create(:user)
+    @photo_content = Faker::Lorem.sentence
   end
 
-  pending "add some scenarios (or delete) #{__FILE__}"
+  context 'ログインしていないとき' do
+    it 'ログインしていない状態で新規投稿ページにアクセスした場合、ログインページに移動する' do
+      # トップページに移動する
+      # ログインしていない場合、ログインページに遷移されることを確認する
+    end
+  end
+  context 'プロトタイプ情報投稿できるとき' do
+    it 'ログイン状態で、必要な情報が存在していれば新規投稿できる' do
+      # ログインする
+      # 新規投稿ページへのボタンがあることを確認する
+      # 新規投稿ページに移動する
+      # フォームに情報を入力する
+      # 添付する画像を定義する
+      # 画像選択フォームに画像を添付する
+      # 保存するボタンを押すとPhotoモデルのカウントが1上がることを確認する
+      # トップページには先ほど投稿した内容の画像情報が存在することを確認する
+      # トップページには先ほど投稿した内容の文字情報が存在することを確認する
+    end
+  end
+  context 'プロトタイプ情報投稿できないとき' do
+    it 'ログイン状態だが、テキストが空では新規投稿ができずに同じページに戻ってくる' do
+      # ログインする
+      # 新規投稿ページへのボタンがあることを確認する
+      # 新規投稿ページに移動する
+      # フォームに情報を入力しない
+      # 添付する画像を定義する
+      # 画像選択フォームに画像を添付する
+      # 保存するボタンを押してもPhotoモデルのカウントは上がらないことを確認する
+      # 新規投稿ページへ戻されることを確認する
+    end
+    it 'ログイン状態だが、画像が空では新規投稿ができずに同じページに戻ってくる' do
+      # ログインする
+      # 新規投稿ページへのボタンがあることを確認する
+      # 新規投稿ページに移動する
+      # フォームに情報を入力する
+      # 画像を添付しない
+      # 保存するボタンを押してもPhotoモデルのカウントは上がらないことを確認する
+      # 新規投稿ページへ戻されることを確認する
+    end
+    it 'ログイン状態だが、テキストと画像が空では新規投稿ができずに同じページに戻ってくる' do
+      # ログインする
+      # 新規投稿ページへのボタンがあることを確認する
+      # 新規投稿ページに移動する
+      # フォームに情報を入力しない
+      # 画像を添付しない
+      # 保存するボタンを押してもPhotoモデルのカウントは上がらないことを確認する
+      # 新規投稿ページへ戻されることを確認する
+    end
+  end
 end

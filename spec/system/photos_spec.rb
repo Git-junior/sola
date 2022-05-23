@@ -112,21 +112,31 @@ RSpec.describe 'プロトタイプ情報詳細表示', type: :system do
   context 'ログインしていないとき' do
     it 'ログインしていない状態で詳細表示ページにアクセスした場合、ログインページに移動する' do
       # トップページに移動する
+      basic_pass root_path
+      visit photo_path(@photo1)
       # ログインしていない場合、ログインページに遷移されることを確認する
+      expect(current_path).to eq(new_user_session_path)
     end
   end
   context 'プロトタイプ情報詳細表示できるとき' do
     it 'ログイン状態で、自分が投稿したプロトタイプ情報は詳細表示できる' do
       # ログインする
+      sign_in(@photo1.user)
       # 自分が投稿したプロトタイプ情報の詳細ページに遷移する
+      visit photo_path(@photo1)
       # 詳細ページにプロトタイプ情報の内容が含まれていることを確認する
+      expect(page).to have_selector('img')
+      expect(page).to have_content(@photo1.content)
     end
   end
   context 'プロトタイプ情報詳細表示できないとき' do
     it 'ログイン状態だが、自分以外が投稿したプロトタイプ情報は詳細表示できずトップページに移動する' do
       # ログインする
+      sign_in(@photo1.user)
       # 自分以外が投稿したプロトタイプ情報の詳細ページに遷移する
+      visit photo_path(@photo2)
       # 自分のトップページに遷移されることを確認する
+      expect(current_path).to eq(photos_index_path)
     end
   end
 end

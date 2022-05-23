@@ -150,30 +150,52 @@ RSpec.describe 'プロトタイプ情報編集', type: :system do
   context 'ログインしていないとき' do
     it 'ログインしていない状態で編集ページにアクセスした場合、ログインページに移動する' do
       # トップページに移動する
+      basic_pass root_path
+      visit edit_photo_path(@photo1)
       # ログインしていない場合、ログインページに遷移されることを確認する
+      expect(current_path).to eq(new_user_session_path)
     end
   end
   context 'プロトタイプ情報編集できるとき' do
     it 'ログイン状態で、自分が投稿したプロトタイプ情報は編集できる' do
       # ログインする
+      sign_in(@photo1.user)
       # 自分が投稿したプロトタイプ情報の詳細表示ページに遷移する
+      visit photo_path(@photo1)
       # 詳細表示ページに編集ページに遷移するボタンがあることを確認する
+      expect(page).to have_content('編集')
       # 編集ページに遷移する
+      visit edit_photo_path(@photo1)
       # すでに投稿済みの内容がフォームに入っていることを確認する
+      expect(
+        find('input[name="photo[content]"]').value
+      ).to eq(@photo1.content)
       # 投稿内容を編集する
+      fill_in 'photo[content]', with: "#{@photo1.content}+編集した情報"
       # 添付する画像を定義する
+      image_path = Rails.root.join('public/images/test02_image.jpeg')
       # 画像選択フォームに画像を添付する
+      attach_file('photo[image]', image_path)
       # 保存するボタンを押してもPhotoモデルのカウントはカウントは変わらないことを確認する
+      expect{
+        find('input[name="commit"]').click
+      }.to change { Photo.count }.by(0)
       # トップページに遷移する
+      visit root_path
       # トップページには先ほど編集した内容の画像情報が存在することを確認する
+      expect(page).to have_selector('img')
       # トップページには先ほど編集した内容の文字情報が存在することを確認する
+      expect(page).to have_content("#{@photo1.content}+編集した情報")
     end
   end
   context 'プロトタイプ情報編集できないとき' do
     it 'ログイン状態だが、自分以外が投稿したプロトタイプ情報は編集できずトップページに移動する' do
       # ログインする
+      sign_in(@photo1.user)
       # 自分以外が投稿したプロトタイプ情報の編集ページに遷移する
+      visit edit_photo_path(@photo2)
       # 自分のトップページに遷移されることを確認する
+      expect(current_path).to eq(photos_index_path)
     end
   end
 end

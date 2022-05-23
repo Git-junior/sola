@@ -67,6 +67,12 @@ RSpec.describe 'ログイン', type: :system do
     @user = FactoryBot.create(:user)
   end
 
+  context 'ログインしていないとき' do
+    it 'ログインしていない状態でトップページにアクセスした場合、ログインページに移動する' do
+      # トップページに移動する
+      # ログインしていない場合、ログインページに遷移されることを確認する
+    end
+  end
   context 'ログインができるとき' do
     it '保存されているユーザーの情報と合致すればログインができる' do
       # トップページに移動する

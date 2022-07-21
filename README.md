@@ -48,6 +48,29 @@ https://docs.google.com/spreadsheets/d/11hLCWlFRvoMEKDqSbjivDohZ3z9LIch45zRuR8ck
 # データベース設計
 ![test](https://user-images.githubusercontent.com/92853864/167257957-74215d65-fe90-42e6-bd19-188a3c92f73a.png)
 
+## users テーブル
+
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+
+### Association
+
+- has_many :photos
+
+## photos テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| content | string     | null: false                    |
+| user    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+
 # ローカルでの動作方法
 - WebブラウザGoogle Chromeの最新版を利用してアクセス.
   -ただしデプロイ等で接続できない場合もある。その際は少し時間をおいてから接続。

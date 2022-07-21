@@ -52,9 +52,9 @@ https://docs.google.com/spreadsheets/d/11hLCWlFRvoMEKDqSbjivDohZ3z9LIch45zRuR8ck
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| name               | string | null: false |
 | email              | string | null: false |
 | encrypted_password | string | null: false |
+| name               | string | null: false |
 
 ### Association
 
